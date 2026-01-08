@@ -1,0 +1,48 @@
+{
+  "extName": { "message": "ChatGPT 跳转栏" },
+  "extDesc": { "message": "在 ChatGPT 对话中添加可拖拽的跳转栏，用于快速定位消息。" },
+  "actionTitle": { "message": "显示/隐藏跳转栏" },
+  "cmdToggle": { "message": "显示/隐藏跳转栏" },
+
+  "optTitle": { "message": "ChatGPT 跳转栏设置" },
+  "optSub": { "message": "设置会保存到本地，并在 ChatGPT 页面自动生效。" },
+
+  "secAppearance": { "message": "外观" },
+  "labUserColor": { "message": "用户颜色" },
+  "labAssistantColor": { "message": "助手颜色" },
+
+  "labBehavior": { "message": "显示行为" },
+  "chkDefaultHidden": { "message": "默认隐藏面板（用图标/快捷键显示）" },
+  "chkParityReverse": { "message": "奇偶反转（当你发现用户/助手顺序相反时开启）" },
+
+  "secSelector": { "message": "选择器" },
+  "labTextSelector": { "message": "正文选择器" },
+  "chkUseCustomSelector": { "message": "启用自定义选择器" },
+  "phSelector": { "message": ".text-token-text-primary" },
+  "hintSelector": { "message": "自定义选择器用于抓取“消息正文元素”。启用后为避免角色判断不稳定，将默认切换为“不区分用户/助手”。" },
+
+  "rowTest": { "message": "测试选择器" },
+  "btnTest": { "message": "测试" },
+
+  "labRoleMode": { "message": "角色区分" },
+  "roleParity": { "message": "按有效条目奇偶区分（第 n 个有效元素交替 用户/助手）" },
+  "roleNone": { "message": "不区分用户/助手（统一样式）" },
+  "hintRole": { "message": "提示：启用自定义选择器时会默认切换为“不区分”。如果你确认仍能稳定判断，也可改回奇偶区分。" },
+
+  "labSrOnly": { "message": "有效性过滤" },
+  "chkRequireSrOnly": { "message": "要求存在 :scope > .sr-only 才视为有效" },
+  "hintSrOnly": { "message": "开启后：没有非空的直接子元素 .sr-only 的节点会被忽略。自定义选择器不包含 .sr-only 时建议关闭。" },
+
+  "statusSaved": { "message": "已保存 ✅（回到 ChatGPT 页面会自动生效）" },
+  "statusReset": { "message": "已恢复默认 ✅" },
+
+  "btnReset": { "message": "恢复默认" },
+  "btnSave": { "message": "保存" },
+
+  "testRunning": { "message": "测试中…" },
+  "testNoTab": { "message": "未找到活动标签页" },
+  "testBadResult": { "message": "无法读取测试结果" },
+  "testSelectorError": { "message": "选择器错误：$1" },
+  "testCount": { "message": "匹配数量：$1" },
+  "testNeedChatGPT": { "message": "无法执行（请打开 ChatGPT 标签页）：$1" }
+}

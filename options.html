@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-i18n="optTitle">ChatGPT Jump Panel Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <h1 data-i18n="optTitle">ChatGPT Jump Panel Settings</h1>
+      <div class="sub" data-i18n="optSub">These settings are saved locally and take effect automatically on ChatGPT pages.</div>
+    </header>
+
+    <section class="card">
+      <h2 data-i18n="secAppearance">Appearance</h2>
+
+      <div class="row">
+        <label class="label" for="userColor" data-i18n="labUserColor">User color</label>
+        <div class="control">
+          <input id="userColor" type="color" />
+          <input id="userColorText" class="mono" type="text" placeholder="#f59e0b" />
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="label" for="assistantColor" data-i18n="labAssistantColor">Assistant color</label>
+        <div class="control">
+          <input id="assistantColor" type="color" />
+          <input id="assistantColorText" class="mono" type="text" placeholder="#3b82f6" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label" data-i18n="labBehavior">Behavior</div>
+        <div class="control col">
+          <label class="check">
+            <input id="defaultHidden" type="checkbox" />
+            <span data-i18n="chkDefaultHidden">Hide panel by default (use icon/hotkey to show)</span>
+          </label>
+
+          <label class="check">
+            <input id="parityReverse" type="checkbox" />
+            <span data-i18n="chkParityReverse">Reverse parity (if user/assistant order looks swapped)</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="secSelector">Selector</h2>
+
+      <div class="row">
+        <div class="label" data-i18n="labTextSelector">Text selector</div>
+        <div class="control col">
+          <label class="check">
+            <input id="useCustomSelector" type="checkbox" />
+            <span data-i18n="chkUseCustomSelector">Enable custom selector</span>
+          </label>
+
+          <input
+            id="customSelector"
+            class="mono"
+            type="text"
+            spellcheck="false"
+            placeholder=".text-token-text-primary"
+            data-i18n-placeholder="phSelector"
+          />
+
+          <div class="hint" data-i18n="hintSelector">
+            Custom selector is used to locate message text nodes. When enabled, role mode defaults to “No role” to avoid unstable role detection.
+          </div>
+
+          <div class="row2">
+            <button id="testSelector" type="button" data-i18n="btnTest">Test</button>
+            <div id="testResult" class="testResult" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label" data-i18n="labRoleMode">Role mode</div>
+        <div class="control col">
+          <label class="radio">
+            <input type="radio" name="roleMode" value="parity" id="roleParity" />
+            <span data-i18n="roleParity">Parity-based (nth valid item alternates user/assistant)</span>
+          </label>
+          <label class="radio">
+            <input type="radio" name="roleMode" value="none" id="roleNone" />
+            <span data-i18n="roleNone">No role (single style for all)</span>
+          </label>
+
+          <div class="hint" data-i18n="hintRole">
+            Tip: When custom selector is enabled, role mode defaults to “No role”. You may switch back if it still works for you.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="label" data-i18n="labSrOnly">Validity filter</div>
+        <div class="control col">
+          <label class="check">
+            <input id="requireSrOnly" type="checkbox" />
+            <span data-i18n="chkRequireSrOnly">Require :scope > .sr-only to treat an item as valid</span>
+          </label>
+
+          <div class="hint" data-i18n="hintSrOnly">
+            If enabled, elements without a non-empty direct child .sr-only will be ignored. Disable this when your custom selector doesn’t include .sr-only.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="status" id="status"></div>
+      <div class="actions">
+        <button id="reset" type="button" class="ghost" data-i18n="btnReset">Reset</button>
+        <button id="save" type="button" data-i18n="btnSave">Save</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

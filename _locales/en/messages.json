@@ -1,0 +1,48 @@
+{
+  "extName": { "message": "ChatGPT Jump Panel" },
+  "extDesc": { "message": "A draggable jump panel to navigate messages in ChatGPT conversations." },
+  "actionTitle": { "message": "Toggle Jump Panel" },
+  "cmdToggle": { "message": "Toggle Jump Panel" },
+
+  "optTitle": { "message": "ChatGPT Jump Panel Settings" },
+  "optSub": { "message": "These settings are saved locally and take effect automatically on ChatGPT pages." },
+
+  "secAppearance": { "message": "Appearance" },
+  "labUserColor": { "message": "User color" },
+  "labAssistantColor": { "message": "Assistant color" },
+
+  "labBehavior": { "message": "Behavior" },
+  "chkDefaultHidden": { "message": "Hide panel by default (use icon/hotkey to show)" },
+  "chkParityReverse": { "message": "Reverse parity (if user/assistant order looks swapped)" },
+
+  "secSelector": { "message": "Selector" },
+  "labTextSelector": { "message": "Text selector" },
+  "chkUseCustomSelector": { "message": "Enable custom selector" },
+  "phSelector": { "message": ".text-token-text-primary" },
+  "hintSelector": { "message": "Custom selector is used to locate message text nodes. When enabled, role mode defaults to “No role” to avoid unstable role detection." },
+
+  "rowTest": { "message": "Test selector" },
+  "btnTest": { "message": "Test" },
+
+  "labRoleMode": { "message": "Role mode" },
+  "roleParity": { "message": "Parity-based (nth valid item alternates user/assistant)" },
+  "roleNone": { "message": "No role (single style for all)" },
+  "hintRole": { "message": "Tip: When custom selector is enabled, role mode defaults to “No role”. You may switch back if it still works for you." },
+
+  "labSrOnly": { "message": "Validity filter" },
+  "chkRequireSrOnly": { "message": "Require :scope > .sr-only to treat an item as valid" },
+  "hintSrOnly": { "message": "If enabled, elements without a non-empty direct child .sr-only will be ignored. Disable this when your custom selector doesn’t include .sr-only." },
+
+  "statusSaved": { "message": "Saved ✅ (Go back to ChatGPT and it will apply automatically)" },
+  "statusReset": { "message": "Reset to defaults ✅" },
+
+  "btnReset": { "message": "Reset" },
+  "btnSave": { "message": "Save" },
+
+  "testRunning": { "message": "Testing…" },
+  "testNoTab": { "message": "No active tab found" },
+  "testBadResult": { "message": "Cannot read test result" },
+  "testSelectorError": { "message": "Selector error: $1" },
+  "testCount": { "message": "Matched: $1" },
+  "testNeedChatGPT": { "message": "Cannot execute (open a ChatGPT tab): $1" }
+}

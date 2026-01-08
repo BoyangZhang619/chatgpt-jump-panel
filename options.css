@@ -1,0 +1,151 @@
+:root{
+  --bg:#0b0b0c;
+  --card:#121214;
+  --border:rgba(255,255,255,.10);
+  --text:#eaeaea;
+  --muted:rgba(255,255,255,.65);
+  --accent:#3b82f6;
+  --shadow: 0 10px 30px rgba(0,0,0,.45);
+  --radius:14px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; }
+
+.wrap{
+  max-width: 860px;
+  padding: 26px 18px 40px;
+  margin: 0 auto;
+}
+
+.header h1{
+  margin:0 0 6px;
+  font-size: 20px;
+}
+.sub{ color:var(--muted); }
+
+.card{
+  margin-top: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.card h2{
+  margin: 0 0 12px;
+  font-size: 15px;
+  color: rgba(255,255,255,.90);
+}
+
+.row{
+  display:grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.row:first-of-type{ border-top:none; padding-top: 2px; }
+
+.label{
+  color: rgba(255,255,255,.85);
+  padding-top: 6px;
+}
+
+.control{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.control.col{
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.mono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+input[type="text"]{
+  width: min(520px, 100%);
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  outline: none;
+}
+
+input[type="text"]:focus{
+  border-color: rgba(59,130,246,.5);
+  box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+}
+
+input[type="color"]{
+  width: 44px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: transparent;
+  padding: 0;
+}
+
+.check, .radio{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  color: rgba(255,255,255,.88);
+}
+
+.check input, .radio input{ transform: translateY(1px); }
+
+.hint{
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer{
+  margin-top: 16px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.status{
+  min-height: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.actions{ display:flex; gap: 10px; }
+
+button{
+  cursor:pointer;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.10);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+button:hover{ background: rgba(255,255,255,.14); }
+
+button.ghost{
+  background: transparent;
+  border-color: rgba(255,255,255,.12);
+}
+
+.row2{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.testResult{
+  color: rgba(255,255,255,.75);
+  font-size: 12px;
+}
