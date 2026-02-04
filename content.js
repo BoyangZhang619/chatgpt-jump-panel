@@ -21,6 +21,7 @@
         location.hostname === "chatgpt.com" || location.hostname === "chat.openai.com";
 
     const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+    const PANEL_BOUNDARY_PADDING = 10;
 
     const storageGet = (key) =>
         new Promise((resolve) => chrome.storage.local.get([key], (r) => resolve(r[key])));
@@ -37,7 +38,7 @@
     };
 
     const getScroller = () =>
-        Array.from(document.querySelectorAll('div[data-scroll-root="true"]'))
+        Array.from(document.querySelectorAll('div[data-scroll-root]'))
             .find(el => el.scrollHeight > el.clientHeight) ||
         document.scrollingElement ||
         document.documentElement;
@@ -176,7 +177,7 @@
       .dragbar {
         height: 18px;
         cursor: move;
-        background: rgba(255,255,255,0.06);
+        background: rgba(128, 128, 128, 0.57);
       }
       .header {
         display:flex;
@@ -266,6 +267,7 @@
         const toggleMinBtn = document.createElement("button");
         toggleMinBtn.textContent = state.minimized ? "▢" : "—";
         toggleMinBtn.title = state.minimized ? "还原" : "最小化";
+        // if (!state.hidden) ensurePanelInViewport();
 
         btnRow.appendChild(refreshBtn);
         btnRow.appendChild(toggleMinBtn);
@@ -291,6 +293,28 @@
         const persistState = debounce(async () => {
             await storageSet({ [EXT_KEY_STATE]: state });
         }, 120);
+
+        const ensurePanelInViewport = () => {
+            const rect = panel.getBoundingClientRect();
+            // display:none 时宽高为 0，此时不调整避免覆盖已有坐标
+            if (!rect.width && !rect.height) return;
+
+            const maxLeft = window.innerWidth - rect.width - PANEL_BOUNDARY_PADDING;
+            const maxTop = window.innerHeight - rect.height - PANEL_BOUNDARY_PADDING;
+
+            const nextLeft = clamp(rect.left, PANEL_BOUNDARY_PADDING, maxLeft);
+            const nextTop = clamp(rect.top, PANEL_BOUNDARY_PADDING, maxTop);
+
+            panel.style.left = nextLeft + "px";
+            panel.style.top = nextTop + "px";
+            panel.style.right = "auto";
+
+            state.left = nextLeft;
+            state.top = nextTop;
+            persistState();
+        };
+
+        const scheduleEnsurePanel = debounce(ensurePanelInViewport, 120);
 
         // 渲染
         const render = () => {
@@ -383,11 +407,11 @@
                 let newTop = startTop + dy;
 
                 const rect = panel.getBoundingClientRect();
-                const maxLeft = window.innerWidth - rect.width - 6;
-                const maxTop = window.innerHeight - rect.height - 6;
+                const maxLeft = window.innerWidth - rect.width - PANEL_BOUNDARY_PADDING;
+                const maxTop = window.innerHeight - rect.height - PANEL_BOUNDARY_PADDING;
 
-                newLeft = clamp(newLeft, 6, maxLeft);
-                newTop = clamp(newTop, 6, maxTop);
+                newLeft = clamp(newLeft, PANEL_BOUNDARY_PADDING, maxLeft);
+                newTop = clamp(newTop, PANEL_BOUNDARY_PADDING, maxTop);
 
                 panel.style.left = newLeft + "px";
                 panel.style.top = newTop + "px";
@@ -420,6 +444,9 @@
             });
         })();
 
+        // keep panel within viewport with a 10px inset when the window resizes
+        window.addEventListener("resize", scheduleEnsurePanel);
+
         // 监听 DOM 变化（新消息/路由切换）
         const observer = new MutationObserver(() => scheduleRender());
         observer.observe(document.body, { childList: true, subtree: true });
@@ -442,6 +469,7 @@
                 // 同步最小化显示
                 toggleMinBtn.textContent = state.minimized ? "▢" : "—";
                 toggleMinBtn.title = state.minimized ? "还原" : "最小化";
+                if (!state.hidden) ensurePanelInViewport();
             }
         });
 
@@ -451,12 +479,13 @@
                 state.hidden = !state.hidden;
                 panel.style.display = state.hidden ? "none" : "block";
                 persistState();
-                if (!state.hidden) render();
+                if (!state.hidden) { render(); ensurePanelInViewport(); }
             }
         });
 
         // 首次渲染
         render();
+        ensurePanelInViewport();
     };
 
     // 启动
